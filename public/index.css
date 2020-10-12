@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "built_tiling";
+  src: local("built_tiling"),
+    url(./police/built\ titling\ bd.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ bd\ it.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ el.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ el\ it.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ lt.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ lt\ it.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ rg.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ rg\ it.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ sb.ttf) format("truetype");
+  src: local("built_tiling"),
+    url(./police/built\ titling\ sb\ it.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "roboto";
+  src: local("roboto"), url(./police/Roboto-Black.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-BlackItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Bold.ttf) format("truetype");
+  src: local("roboto"),
+    url(./police/Roboto-BoldCondensed.ttf) format("truetype");
+  src: local("roboto"),
+    url(./police/Roboto-BoldCondensedItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-BoldItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Condensed.ttf) format("truetype");
+  src: local("roboto"),
+    url(./police/Roboto-CondensedItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Italic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Light.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-LightItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Medium.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-MediumItalic.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Regular.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-Thin.ttf) format("truetype");
+  src: local("roboto"), url(./police/Roboto-ThinItalic.ttf) format("truetype");
+}
+
+.test {
+  font-family: "roboto", Arial, serif;
+}
