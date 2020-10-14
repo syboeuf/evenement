@@ -7,18 +7,29 @@ import Grid from "@material-ui/core/Grid";
 import Slide from "components/Slide";
 import Text from "components/Text";
 import PicturesDisplay from "components/PicturesDisplay";
-import Footer from "components/Footer";
+import Player from "components/Player";
 
 const useStyles = makeStyles({
   bold: { fontWeight: "bold" },
-  h1: { fontSize: "2.5em", marginBottom: 15 },
+  h1: { fontSize: "2.5em", marginBottom: 15, marginLeft: 15 },
   h2: {
-    fontSize: "1.5em",
+    fontSize: "3.5em",
     fontWeight: "bold",
     marginBottom: 15,
     marginTop: 15,
+    marginLeft: "5%",
+  },
+  movieTitle: {
+    textAlign: "center",
+    fontSize: "1.5em",
+    fontWeight: "bold",
   },
 });
+
+const stylePicture = {
+  square: { width: 300, height: 300 },
+  rectangle: { width: 180, height: 300 },
+};
 
 const Label = () => {
   const [artistArray, setArtistArray] = useState([]);
@@ -46,6 +57,7 @@ const Label = () => {
       fourEvenementielText,
       fiveEvenementielText,
       sixEvenementielText,
+      afterMovieTitle,
     },
   } = text;
 
@@ -102,20 +114,34 @@ const Label = () => {
 
   return (
     <div>
-      <h1 className="test">Ceci est un test</h1>
       <Text className={classes.h1} variant="h1" text={title} />
       <Text className={classes.h2} variant="h2" text={artistTitle} />
-      <PicturesDisplay picturesArray={artistArray} />
+      <PicturesDisplay
+        picturesArray={artistArray}
+        format={stylePicture.rectangle}
+        title="Nom"
+      />
+      <div className="line" />
       <Text className={classes.h2} variant="h2" text={releaseTitle} />
-      <PicturesDisplay picturesArray={releaseArray} />
+      <PicturesDisplay
+        picturesArray={releaseArray}
+        format={stylePicture.square}
+        title="Release"
+      />
+      <div className="line" />
       <Text className={classes.h2} variant="h2" text={mixTitle} />
-      <PicturesDisplay picturesArray={mixArray} />
+      <PicturesDisplay
+        picturesArray={mixArray}
+        format={stylePicture.square}
+        title="Mix"
+      />
+      <div className="line" />
       <Grid container alignItems="center" justify="center">
         <Grid item sm={5} xs={11}>
           <div>
             <Text
               className={classes.h1}
-              variant="h1"
+              variant="h2"
               text={evenementielTitle}
             />
           </div>
@@ -130,13 +156,9 @@ const Label = () => {
                 <Slide picturesArray={firstEvenementArray} />
               </Grid>
               <Grid item sm={5} xs={11}>
-                <div style={{ textAlign: "center", marginLeft: 10 }}>
-                  <Text
-                    className={classes.bold}
-                    variant="body1"
-                    text={firstEvenementielText}
-                  />
-                  <Text variant="body1" text={secondEvenementielText} />
+                <div className="text_evenement">
+                  <Text className={classes.bold} text={firstEvenementielText} />
+                  <Text text={secondEvenementielText} />
                 </div>
               </Grid>
             </Grid>
@@ -154,14 +176,24 @@ const Label = () => {
                 <Slide picturesArray={secondEvenementArray} />
               </Grid>
               <Grid item xs={11} sm={5}>
-                <div style={{ textAlign: "center", marginLeft: 10 }}>
-                  <Text
-                    className={classes.bold}
-                    variant="body1"
-                    text={thirdEvenementielText}
-                  />
-                  <Text variant="body1" text={fourEvenementielText} />
+                <div className="text_evenement">
+                  <Text className={classes.bold} text={thirdEvenementielText} />
+                  <Text text={fourEvenementielText} />
                 </div>
+              </Grid>
+            </Grid>
+            <Grid container justify="center">
+              <Grid item xs={12} sm={6}>
+                <Player
+                  path={`${process.env.PUBLIC_URL}/evenement/Entre les Vignes/Aftermovie.MP4`}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} style={{ alignSelf: "center" }}>
+                <Text
+                  className={classes.movieTitle}
+                  variant="h2"
+                  text={afterMovieTitle}
+                />
               </Grid>
             </Grid>
           </div>
@@ -175,20 +207,14 @@ const Label = () => {
               <Slide picturesArray={thirdEvenementArray} />
             </Grid>
             <Grid item xs={11} sm={5}>
-              <div style={{ textAlign: "center", marginLeft: 10 }}>
-                <Text
-                  className={classes.bold}
-                  variant="body1"
-                  text={fiveEvenementielText}
-                />
-                <Text variant="body1" text={sixEvenementielText} />
+              <div className="text_evenement">
+                <Text className={classes.bold} text={fiveEvenementielText} />
+                <Text text={sixEvenementielText} />
               </div>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <div className="line" />
-      <Footer />
     </div>
   );
 };

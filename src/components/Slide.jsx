@@ -32,14 +32,14 @@ const Slide = ({ picturesArray }) => (
     keyBoardControl={false}
   >
     {picturesArray.map((picture, index) => (
-        <div style={{ textAlign: "center" }} key={index}>
-          <img
-            src={picture}
-            alt={`${index}`}
-            style={{ width: 300, height: 250 }}
-          />
-        </div>
-      ))}
+      <div style={{ textAlign: "center" }} key={index}>
+        <img
+          src={picture}
+          alt={`${index}`}
+          style={{ width: 180, height: 300 }}
+        />
+      </div>
+    ))}
   </Carousel>
 );
 

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
+import MyTextField from "components/MyTextField";
+import Text from "components/Text";
+
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
-import { CardActions } from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import { init, send } from "emailjs-com";
+import text from "text";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 1140,
@@ -18,23 +20,16 @@ const useStyles = makeStyles({
     marginTop: 15,
     marginBottom: 15,
   },
-  test: {
-    maxWidth: 500,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  logoContainer: {
-    justifyContent: "center",
+  imageContainer: {
     maxWidth: 1140,
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 15,
-    marginBottom: 15,
   },
   formContainer: {
     maxWidth: 1140,
     marginLeft: "auto",
     marginRight: "auto",
+    justifyContent: "center",
     marginTop: 160,
     marginBottom: 120,
   },
@@ -42,7 +37,7 @@ const useStyles = makeStyles({
     fontSize: 28,
     textAlign: "left",
     marginBottom: 10,
-    fontFamily: "Built Tilting",
+    fontFamily: "built-tiling",
     color: "#CDC6BB",
     fontWeight: "bold",
   },
@@ -50,28 +45,79 @@ const useStyles = makeStyles({
     fontSize: 28,
     textAlign: "center",
     marginBottom: 10,
-    fontFamily: "Built Tilting",
+    fontFamily: "built-tiling",
     color: "#CDC6BB",
     fontWeight: "bold",
   },
   paragraphText: {
     fontSize: 16,
     textAlign: "left",
-    fontFamily: "Roboto",
+    fontFamily: "roboto",
   },
 });
-
 const Agence = () => {
+  const [email, setEmail] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [society, setSociety] = useState("");
+  const [message, setMessage] = useState("");
+
+  const {
+    agence: {
+      firstTitle,
+      firstParagraph,
+      secondTitle,
+      secondParagraph,
+      queens,
+      thirdTitle,
+      thirdParagraph,
+      contact,
+      Bpointone,
+      BpointTwo,
+      BpointThree,
+      Bpointfour,
+      Bpointfive,
+      Bpointsix,
+      Bpointseven,
+      Bpointeight,
+      Bpointnine,
+    },
+  } = text;
+
   const classes = useStyles();
+
+  useEffect(() => {
+    init("user_B7C3ERKWub9k5BZRDcRuo");
+  }, []);
+
+  const sendEmail = async () => {
+    var templateParams = {
+      reply_to: email,
+      to_name: "Alexis",
+      from_name: `${firstName} ${lastName}`,
+      message: `${email} ${society} ${message}`,
+    };
+    try {
+      const result = await send("gmail", "template_vt76pmq", templateParams);
+      const { status, text } = result;
+      if (status === 200) {
+        console.log("Success", text);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <Grid container className={classes.logoContainer}>
+      <Grid justify="center" container className={classes.root}>
         <CardContent>
           {" "}
           <img
             src={`${process.env.PUBLIC_URL}/agence/logostudio-02.jpg`}
-            maxWidth="400"
+            maxwidth="400"
             height="300"
+            alt="picture_agence_logo"
           />
         </CardContent>
       </Grid>
@@ -79,120 +125,92 @@ const Agence = () => {
         <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Typography className={classes.paragraphTitle}>
-              VOS PROJETS ÉVÉNEMENTIELS
-            </Typography>
-            <Typography className={classes.paragraphText}>
-              Nous proposons des prestations artistiques (DJ, Live-Band, bandes
-              sons thématiques) pour vos évènements. Nous manageons plusieurs
-              artistes sélectionnés pour leur approche et leur style. Sélection
-              du profil, booking et placement, Maison Sonore déniche les talents
-              les plus pertinents pour sublimer vos moments. <br /> <br />
-              Nous concevons également, si vous le souhaitez, l’organisation d’
-              événements festifs (concept, prestation sonorisation et éclairage,
-              décoration...).
-            </Typography>
+            <Text text={firstTitle} className={classes.paragraphTitle} />
+            <Text text={firstParagraph} className={classes.paragraphText} />
           </CardContent>
         </Grid>
       </Grid>
-      <Grid container className={classes.test} justify="flex-end">
+      <Grid container className={classes.imageContainer} justify="flex-end">
         <Grid item xs={12} sm={6}>
           <CardContent>
             {" "}
             <img
               src={`${process.env.PUBLIC_URL}/agence/QUEENS-LEG.jpg`}
-              style={{ maxWidth: 400, height: 300 }}
+              style={{ maxWidth: "100%" }}
+              alt="picture_agence_queen"
             />
-            <Typography style={{ textAlign: "center" }}>
-              Client : le Queen’s Leg Lieu : Valbonne
-            </Typography>
+            <Typography style={{ textAlign: "center" }}>{queens}</Typography>
           </CardContent>
         </Grid>
       </Grid>
       <Grid container className={classes.root}>
-        <Grid item item xs={11} sm={6}>
+        <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Typography className={classes.paragraphTitle}>
-              STRATÉGIE
-            </Typography>
-            <Typography className={classes.paragraphText}>
-              Animés d’une irréversible passion, nous faisons preuve d’une
-              curiosité sans limite pour digger en permanence les dernières
-              tendances digitales et proposer la meilleure approche pour
-              développer vos projets.
-            </Typography>
-            <Typography className={classes.paragraphText}>
-              <br />● Stratégie de communication
-              <br />● Étude de fond de marque Branding, positionnement <br /> ●
-              Étude de tendances <br />● Optimisation des budgets de
-              communication
-              <br />● Conseil en développement
-            </Typography>
+            <Text text={secondTitle} className={classes.paragraphTitle} />
+            <Text text={secondParagraph} className={classes.paragraphText} />
+            <br />
+            <Text text={Bpointone} className={classes.paragraphText} />
+            <Text text={BpointTwo} className={classes.paragraphText} />
+            <Text text={BpointThree} className={classes.paragraphText} />
+            <Text text={Bpointfour} className={classes.paragraphText} />
+            <Text text={Bpointfive} className={classes.paragraphText} />
           </CardContent>
         </Grid>
       </Grid>
       <Grid container className={classes.root} justify="flex-end">
-        <Grid item item xs={11} sm={6}>
+        <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Typography className={classes.paragraphTitle}>
-              STUDIO DE CRÉATION
-            </Typography>
-            <Typography className={classes.paragraphText}>
-              Maison Sonore design aussi vos envies grâce à son scop
-              d’expertises incluant :<br /> <br />
-              ● Sound Designer <br />
-              ● Designer 3D <br />
-              ● Web Designer Graphiste <br />● Photographe
-            </Typography>
+            <Text text={thirdTitle} className={classes.paragraphTitle} />
+            <Text text={thirdParagraph} className={classes.paragraphText} />
+            <br />
+            <Text text={Bpointsix} className={classes.paragraphText} />
+            <Text text={Bpointseven} className={classes.paragraphText} />
+            <Text text={Bpointeight} className={classes.paragraphText} />
+            <Text text={Bpointnine} className={classes.paragraphText} />
           </CardContent>
         </Grid>
       </Grid>
       <Grid container className={classes.formContainer}>
         <Grid item xs={11}>
-          <Typography className={classes.formTitle} gutterBottom>
-            CONTACT
-          </Typography>
+          <Text text={contact} className={classes.formTitle} />
           <Grid container className={classes.root} spacing={3}>
             <Grid item xs={11} sm={6}>
-              <TextField required id="Nom" name="Nom" label="Nom" fullWidth />
+              <MyTextField
+                label="Nom"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </Grid>
             <Grid item xs={11} sm={6}>
-              <TextField
-                required
-                id="Prenom"
-                name="Prenom"
+              <MyTextField
                 label="Prénom"
-                fullWidth
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={11} sm={6}>
-              <TextField
-                required
-                id="email"
-                name="email"
+              <MyTextField
                 label="Email"
-                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={11} sm={6}>
-              <TextField
-                required
-                id="Societe"
-                name="Societe"
+              <MyTextField
                 label="Société"
-                fullWidth
+                value={society}
+                onChange={(e) => setSociety(e.target.value)}
               />
             </Grid>
-            <Grid item xs={11}>
-              <TextField
-                required
-                id="Message"
-                name="Message"
+            <Grid item xs={11} sm={12}>
+              <MyTextField
                 label="Message"
                 fullWidth
-                multiline
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                multiline={true}
               />
             </Grid>
           </Grid>
@@ -201,17 +219,14 @@ const Agence = () => {
               variant="outlined"
               color="primary"
               size="medium"
-              styles={{ justifyContent: "center" }}
               endIcon={<Icon>send</Icon>}
+              onClick={() => sendEmail()}
             >
               Envoyer
             </Button>
           </Grid>
         </Grid>
       </Grid>
-      <div className="footer">
-        <p className="text_footer">maison.sonore@gmail.com</p>
-      </div>
     </div>
   );
 };

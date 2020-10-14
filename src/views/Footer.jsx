@@ -48,7 +48,7 @@ const Footer = () => {
         const { url, svg } = svgData;
         return (
           <Grid className={classes.gridSvg} item key={index} xs={4} sm={2}>
-            <a target="_blank" href={url}>
+            <a target="_blank" rel="noopener noreferrer" href={url}>
               <Icon className="home_icon">
                 <img
                   alt="icon"

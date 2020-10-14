@@ -5,16 +5,21 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    "@media (min-width:780px)": {
+      paddingLeft: "5%",
+    },
+  },
   popover: {
     pointerEvents: "none",
   },
   paper: {
     padding: theme.spacing(1),
   },
-  imgContainer: { textAlign: "center" },
+  imgContainer: { textAlign: "center", marginLeft: 15 },
 }));
 
-const PicturesDisplay = ({ picturesArray }) => {
+const PicturesDisplay = ({ picturesArray, format, title }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [name, setName] = useState("");
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -31,7 +36,7 @@ const PicturesDisplay = ({ picturesArray }) => {
 
   return (
     <div>
-      <Grid justify="center" container spacing={4}>
+      <Grid className={classes.container} container>
         {picturesArray.map((picture, index) => (
           <Grid
             className={classes.imgContainer}
@@ -45,8 +50,8 @@ const PicturesDisplay = ({ picturesArray }) => {
           >
             <img
               src={picture}
-              alt={`picture-${index}`}
-              style={{ width: 300, height: 250 }}
+              alt={`pic_${index}`}
+              style={format}
               onMouseMove={(e) => showData(e, picture)}
               onMouseLeave={() => setAnchorEl(null)}
             />
@@ -74,7 +79,7 @@ const PicturesDisplay = ({ picturesArray }) => {
         onClose={() => setAnchorEl(null)}
         disableRestoreFocus
       >
-        <Typography>{name}</Typography>
+        <Typography>{`${title}: ${name}`}</Typography>
       </Popover>
     </div>
   );

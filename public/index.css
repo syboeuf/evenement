@@ -45,6 +45,10 @@
   src: local("roboto"), url(./police/Roboto-ThinItalic.ttf) format("truetype");
 }
 
-.test {
+.title {
+  font-family: "built_tiling", Arial, serif;
+}
+
+.para {
   font-family: "roboto", Arial, serif;
 }

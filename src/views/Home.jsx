@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Footer from "components/Footer";
 import Text from "components/Text";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
@@ -17,9 +16,7 @@ const useStyles = makeStyles({
     marginTop: 15,
   },
   homeTitle: {
-    fontSize: "2.5em",
-    textTransform: "uppercase",
-    fontFamily: "'Montserrat',sans-serif",
+    fontSize: "3.5em",
     marginBottom: 20,
   },
   card: {
@@ -57,13 +54,14 @@ const Home = () => {
   } = text;
 
   return (
-    <div a={console.log(text)}>
+    <div>
       <div>
         <div className={classes.card}>
           <CardContent>
             <img
               src={`${process.env.PUBLIC_URL}logo.png`}
               style={{ maxWidth: 300 }}
+              alt="picture_home_logo"
             />
             <Text variant="h2" className={classes.homeTitle} text={title} />
             <Text variant="body1" className={classes.text} text={para} />
@@ -98,9 +96,6 @@ const Home = () => {
               })}
             </Grid>
           </div>
-          <div className="line" />
-          <Footer />
-          <div className="line" />
         </div>
       </div>
     </div>
