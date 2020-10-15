@@ -53,7 +53,7 @@ const Footer = () => {
                 <img
                   alt="icon"
                   className={classes.imageIcon}
-                  src={`svg/${svg}`}
+                  src={`${process.env.PUBLIC_URL}/svg/${svg}`}
                 />
               </Icon>
             </a>

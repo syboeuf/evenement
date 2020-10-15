@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Text from "components/Text";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
+import Footer from "components/Footer";
 
 import text from "text";
 
@@ -98,6 +99,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="line" />
+      <div className="line" />
+      <Footer />
     </div>
   );
 };

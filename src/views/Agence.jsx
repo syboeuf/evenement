@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import MyTextField from "components/MyTextField";
 import Text from "components/Text";
-
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
@@ -11,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { init, send } from "emailjs-com";
 import text from "text";
+import Footer from "components/Footer";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +37,6 @@ const useStyles = makeStyles({
     fontSize: 28,
     textAlign: "left",
     marginBottom: 10,
-    fontFamily: "built-tiling",
     color: "#CDC6BB",
     fontWeight: "bold",
   },
@@ -45,14 +44,12 @@ const useStyles = makeStyles({
     fontSize: 28,
     textAlign: "center",
     marginBottom: 10,
-    fontFamily: "built-tiling",
     color: "#CDC6BB",
     fontWeight: "bold",
   },
   paragraphText: {
     fontSize: 16,
     textAlign: "left",
-    fontFamily: "roboto",
   },
 });
 const Agence = () => {
@@ -61,6 +58,7 @@ const Agence = () => {
   const [firstName, setFirstName] = useState("");
   const [society, setSociety] = useState("");
   const [message, setMessage] = useState("");
+  const [spam, setSpam] = useState(true);
 
   const {
     agence: {
@@ -83,28 +81,49 @@ const Agence = () => {
       Bpointnine,
     },
   } = text;
-
   const classes = useStyles();
 
   useEffect(() => {
     init("user_B7C3ERKWub9k5BZRDcRuo");
   }, []);
 
+  const checkEmail = (email) => {
+    const regexEmail = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+    return regexEmail.test(email);
+  };
   const sendEmail = async () => {
-    var templateParams = {
-      reply_to: email,
-      to_name: "Alexis",
-      from_name: `${firstName} ${lastName}`,
-      message: `${email} ${society} ${message}`,
-    };
-    try {
-      const result = await send("gmail", "template_vt76pmq", templateParams);
-      const { status, text } = result;
-      if (status === 200) {
-        console.log("Success", text);
+    if (!spam) {
+      return;
+    }
+    if (
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !email.trim() ||
+      !society.trim() ||
+      !message.trim()
+    ) {
+      alert("Incomplete data");
+    } else if (!checkEmail(email)) {
+      alert("Invalid email");
+    } else {
+      try {
+        var templateParams = {
+          reply_to: email,
+          email,
+          society,
+          from_name: `${firstName} ${lastName}`,
+          message,
+        };
+        setSpam(false);
+        const result = await send("gmail", "template_vt76pmq", templateParams);
+        const { status } = result;
+        if (status === 200) {
+          setSpam(true);
+          alert("Email sent !");
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -125,7 +144,11 @@ const Agence = () => {
         <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Text text={firstTitle} className={classes.paragraphTitle} />
+            <Text
+              text={firstTitle}
+              variant="h2"
+              className={classes.paragraphTitle}
+            />
             <Text text={firstParagraph} className={classes.paragraphText} />
           </CardContent>
         </Grid>
@@ -147,7 +170,11 @@ const Agence = () => {
         <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Text text={secondTitle} className={classes.paragraphTitle} />
+            <Text
+              text={secondTitle}
+              variant="h2"
+              className={classes.paragraphTitle}
+            />
             <Text text={secondParagraph} className={classes.paragraphText} />
             <br />
             <Text text={Bpointone} className={classes.paragraphText} />
@@ -162,7 +189,11 @@ const Agence = () => {
         <Grid item xs={11} sm={6}>
           <CardContent>
             {" "}
-            <Text text={thirdTitle} className={classes.paragraphTitle} />
+            <Text
+              text={thirdTitle}
+              variant="h2"
+              className={classes.paragraphTitle}
+            />
             <Text text={thirdParagraph} className={classes.paragraphText} />
             <br />
             <Text text={Bpointsix} className={classes.paragraphText} />
@@ -174,7 +205,7 @@ const Agence = () => {
       </Grid>
       <Grid container className={classes.formContainer}>
         <Grid item xs={11}>
-          <Text text={contact} className={classes.formTitle} />
+          <Text text={contact} variant="h2" className={classes.formTitle} />
           <Grid container className={classes.root} spacing={3}>
             <Grid item xs={11} sm={6}>
               <MyTextField
@@ -227,6 +258,9 @@ const Agence = () => {
           </Grid>
         </Grid>
       </Grid>
+      <div className="line" />
+      <div className="line" />
+      <Footer />
     </div>
   );
 };

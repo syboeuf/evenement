@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./views/Home";
 import Label from "./views/Label";
 import Agence from "./views/Agence";
-import Footer from "./views/Footer";
+import Error from "./views/Error";
 
 const theme = createMuiTheme({
   typography: {
@@ -25,18 +25,14 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <div>
-      <div>
-        <Router>
-          <Switch>
-            <Route exact path="/Label" component={Label} />
-            <Route exact path="/Agence" component={Agence} />
-            <Route path="/" component={Home} />
-          </Switch>
-        </Router>
-      </div>
-      <div className="line" />
-      <div className="line" />
-      <Footer />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Label" component={Label} />
+          <Route exact path="/Agence" component={Agence} />
+          <Route component={Error} />
+        </Switch>
+      </Router>
     </div>
   </ThemeProvider>
 );

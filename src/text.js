@@ -22,6 +22,7 @@ const text = {
     fiveEvenementielText: "Au large avec Maison Sonore",
     sixEvenementielText:
       "La fête de la musique en mode COVID Friendly. Nous avons invité notre communauté à nous rejoindre en bateaux pour profiter d’un DJ Set et d’un dancefloor flottant.",
+    afterMovieTitle: "Aftermovie",
   },
   agence: {
     firstTitle: "VOS PROJETS ÉVÉNEMENTIELS",

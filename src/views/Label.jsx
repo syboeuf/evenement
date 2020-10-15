@@ -8,6 +8,7 @@ import Slide from "components/Slide";
 import Text from "components/Text";
 import PicturesDisplay from "components/PicturesDisplay";
 import Player from "components/Player";
+import Footer from "components/Footer";
 
 const useStyles = makeStyles({
   bold: { fontWeight: "bold" },
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
 });
 
 const stylePicture = {
-  square: { width: 300, height: 300 },
+  square: { width: 250, height: 250 },
   rectangle: { width: 180, height: 300 },
 };
 
@@ -137,7 +138,7 @@ const Label = () => {
       />
       <div className="line" />
       <Grid container alignItems="center" justify="center">
-        <Grid item sm={5} xs={11}>
+        <Grid item sm={11} md={5} xs={11}>
           <div>
             <Text
               className={classes.h1}
@@ -164,7 +165,7 @@ const Label = () => {
             </Grid>
           </div>
         </Grid>
-        <Grid item sm={5} xs={11}>
+        <Grid item sm={11} md={5} xs={11}>
           <div>
             <Text
               className={classes.h2}
@@ -215,6 +216,9 @@ const Label = () => {
           </Grid>
         </Grid>
       </Grid>
+      <div className="line" />
+      <div className="line" />
+      <Footer />
     </div>
   );
 };
